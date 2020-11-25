@@ -20,7 +20,7 @@ public class CSVReader {
         csvFile = csvfile;
     }
 
-    public static void write() {
+    public final void write(String[] argumentsToWrite) {
 
         try {
             FileWriter fw = new FileWriter(csvFile, true);
@@ -29,7 +29,7 @@ public class CSVReader {
 
             // Date date = new Date();
 
-            // pw.println(actionName + "," + date.toString());
+            pw.println(argumentsToWrite[0] + "," + argumentsToWrite[1] + "," + argumentsToWrite[2]);
             pw.flush();
             pw.close();
 
@@ -63,6 +63,15 @@ public class CSVReader {
 
         return list;
     }
+    
+    public final int getIncrementedId(ArrayList<String[]> list) {
+        int id = 0;
+        int idPosition = this.findCategory("id", list);
+        id = Integer.parseInt(list.get(list.size()-1)[idPosition]);
+        return id + 1;
+    }
+
+     
 
     public final int findCategory(String category, ArrayList<String[]> list) {
         int index = 0;
@@ -86,6 +95,8 @@ public class CSVReader {
         }
         return foundList;
     }
+     
+
 
     public static void main(String[] args) {
         // csv file to read
@@ -96,6 +107,11 @@ public class CSVReader {
         for (String strings : list2) {
             System.out.println(strings);
         }
+        String[] argsStrings = {"11","warr","gsp"};
+        csv.write(argsStrings);
+        System.out.println(
+        csv.getIncrementedId(list)
+        );
     }
 
 }
