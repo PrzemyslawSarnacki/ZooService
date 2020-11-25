@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/home/student/eclipse-java-workspace/TestProject/NewService.wsdl" uri="wsdl/NewService.wsdl"/>
+    <system systemId="file:/home/student/eclipse-workspace/TestProject/TestProject/ZooService.wsdl" uri="wsdl/ZooService.wsdl"/>
+    <system systemId="file:/home/student/eclipse-workspace/TestProject/TestProject/ZooService1.wsdl" uri="wsdl/ZooService1.wsdl"/>
+    <system systemId="file:/home/student/eclipse-java-workspace/ZooService-nie-dziala.wsdl" uri="wsdl/ZooService-nie-dziala.wsdl"/>
+    <system systemId="file:/home/student/eclipse-java-workspace/ZooService.wsdl" uri="wsdl/ZooService.wsdl"/>
+</catalog>

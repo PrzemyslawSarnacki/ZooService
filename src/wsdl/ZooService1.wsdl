@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/NewService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NewService" targetNamespace="http://www.example.org/NewService/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/NewService/">
+      <xsd:element name="AddAnimal">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="Name" type="xsd:string" />
+          	<xsd:element name="Parents" type="tns:ParentsType"></xsd:element>
+          	<xsd:element name="AnimalDetails"
+          		type="tns:AnimalDetailsType">
+          	</xsd:element>
+          	<xsd:element name="AnimalClassification"
+          		type="tns:AnimalClassificationType">
+          	</xsd:element>
+          	<xsd:element name="LastVaccination" type="tns:LastVaccinationType"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AddAnimalResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CheckHealth">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:int"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CheckHealthResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+                        <xsd:element name="id" type="xsd:int"></xsd:element>
+                        <xsd:element name="Name" type="xsd:string"></xsd:element>
+      			<xsd:element name="Parents" type="tns:ParentsType"></xsd:element>
+      			<xsd:element name="HealthParameters"
+      				type="tns:HealthParametersType">
+      			</xsd:element>
+      			</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="ParentsType">
+      	<xsd:sequence>
+      		<xsd:element name="MotherName" type="xsd:string"></xsd:element>
+      		<xsd:element name="FatherName" type="xsd:string"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="AnimalDetailsType">
+      	<xsd:sequence>
+      		<xsd:element name="DateOfBirth" type="xsd:date"></xsd:element>
+      		<xsd:element name="Height" type="xsd:int"></xsd:element>
+      		<xsd:element name="Weight" type="xsd:float"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+      
+            <xsd:complexType name="AnimalClassificationType">
+            	<xsd:sequence>
+            		<xsd:element name="Domain" type="xsd:string"></xsd:element>
+            		<xsd:element name="Class" type="xsd:string"></xsd:element>
+            		<xsd:element name="Order" type="xsd:string"></xsd:element>
+            		<xsd:element name="Family" type="xsd:string"></xsd:element>
+            		<xsd:element name="Genus" type="xsd:string"></xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="HealthParametersType">
+            	<xsd:sequence>
+            		<xsd:element name="HeartRate" type="xsd:int"></xsd:element>
+            		<xsd:element name="Coordinates"
+            			type="tns:CoordinatesType">
+            		</xsd:element>
+            		<xsd:element name="Mood" type="xsd:string"></xsd:element>
+            		<xsd:element name="HealthState" type="xsd:string"></xsd:element>
+            		<xsd:element name="VaccinationRequired" type="xsd:boolean"></xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="CoordinatesType">
+            	<xsd:sequence>
+            		<xsd:element name="Longitude" type="xsd:float"></xsd:element>
+            		<xsd:element name="Latitude" type="xsd:float"></xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="PopularityType">
+            	<xsd:sequence>
+            		<xsd:element name="VisitorsToday" type="xsd:int"></xsd:element>
+            		<xsd:element name="VisitorsYesterday"
+            			type="xsd:int">
+            		</xsd:element>
+            		<xsd:element name="MeanVisitorsCount" type="xsd:int"></xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="LastVaccinationType">
+            	<xsd:sequence>
+            		<xsd:element name="VaccinationDate"
+            			type="xsd:date">
+            		</xsd:element>
+            		<xsd:element name="VaccineName"
+            			type="xsd:string">
+            		</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="CheckPopularity">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="Name" type="xsd:string">
+            			</xsd:element>
+            			<xsd:element name="DateOfBirth"
+            				type="xsd:date">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="CheckPopularityResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="id" type="xsd:int"></xsd:element>
+            			<xsd:element name="Popularity" type="tns:PopularityType"></xsd:element>
+            			<xsd:element name="Parents" type="tns:ParentsType"></xsd:element>
+      		
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="AddAnimalRequest">
+    <wsdl:part element="tns:AddAnimal" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AddAnimalResponse">
+    <wsdl:part element="tns:AddAnimalResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="CheckHealthRequest">
+  	<wsdl:part name="parameters" element="tns:CheckHealth"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CheckHealthResponse">
+  	<wsdl:part name="parameters" element="tns:CheckHealthResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CheckPopularityRequest">
+  	<wsdl:part name="parameters" element="tns:CheckPopularity"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CheckPopularityResponse">
+  	<wsdl:part name="parameters" element="tns:CheckPopularityResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ZooService">
+    <wsdl:operation name="AddAnimal">
+      <wsdl:input message="tns:AddAnimalRequest"/>
+      <wsdl:output message="tns:AddAnimalResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CheckHealth">
+    	<wsdl:input message="tns:CheckHealthRequest"></wsdl:input>
+    	<wsdl:output message="tns:CheckHealthResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPopularity">
+    	<wsdl:input message="tns:CheckPopularityRequest"></wsdl:input>
+    	<wsdl:output message="tns:CheckPopularityResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NewServiceSOAP" type="tns:ZooService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="AddAnimal">
+      <soap:operation soapAction="http://www.example.org/NewService/AddAnimal"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZooService">
+    <wsdl:port binding="tns:NewServiceSOAP" name="ZooServiceSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
