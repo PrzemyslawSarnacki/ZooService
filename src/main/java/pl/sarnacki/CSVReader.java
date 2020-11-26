@@ -26,10 +26,11 @@ public class CSVReader {
             FileWriter fw = new FileWriter(csvFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-
-            // Date date = new Date();
-
-            pw.println(argumentsToWrite[0] + "," + argumentsToWrite[1] + "," + argumentsToWrite[2]);
+            
+            for (String argumentToWrite : argumentsToWrite) {
+                pw.print(argumentToWrite + ",");
+            }
+            pw.println();
             pw.flush();
             pw.close();
 
@@ -107,11 +108,9 @@ public class CSVReader {
         for (String strings : list2) {
             System.out.println(strings);
         }
-        String[] argsStrings = {"11","warr","gsp"};
+        String[] argsStrings = {Integer.toString(csv.getIncrementedId(list)),"gewi","vgeds"};
         csv.write(argsStrings);
-        System.out.println(
-        csv.getIncrementedId(list)
-        );
+
     }
 
 }
