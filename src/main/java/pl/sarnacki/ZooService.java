@@ -81,5 +81,9 @@ public class ZooService {
     private static Integer nextId(){
         return currentId++;
     }
+
+    public static void main(String[] args) {
+        System.out.println("lollll");
+    }
     
 }

@@ -3,8 +3,10 @@ import java.util.Random;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.Calendar;
 
 public class HealthParameters {
+    
     public static double heartRate() {
         Random rnd = new Random();
         int x = rnd.nextInt();
@@ -27,12 +29,14 @@ public class HealthParameters {
         return coordinates;
     }
 
-    public static boolean vaccinationRequired(String start_date, String end_date) {
+    public static boolean vaccinationRequired(String start_date) {
         boolean isRequired = true;
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String timeStamp = sdf.format(Calendar.getInstance().getTime());
+
         try {
             Date d1 = sdf.parse(start_date);
-            Date d2 = sdf.parse(end_date);
+            Date d2 = sdf.parse(timeStamp);
             long difference_In_Time = d2.getTime() - d1.getTime();
             long difference_In_Years = (difference_In_Time / (1000l * 60 * 60 * 24 * 365));
 
@@ -50,11 +54,9 @@ public class HealthParameters {
     }
 
     public static void main(String[] args) {
-        String start_date = "10-01-2018 01:10:20";
+        String start_date = "10-01-2020 01:10:20";
 
-        String end_date = "10-06-2020 06:30:50";
-
-        System.out.println(HealthParameters.vaccinationRequired(start_date, end_date));
+        System.out.println(HealthParameters.vaccinationRequired(start_date));
     }
 
 }
