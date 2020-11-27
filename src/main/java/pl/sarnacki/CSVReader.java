@@ -1,3 +1,4 @@
+package pl.sarnacki;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
@@ -74,7 +75,7 @@ public class CSVReader {
 
      
 
-    public final int findCategory(String category, ArrayList<String[]> list) {
+    private int findCategory(String category, ArrayList<String[]> list) {
         int index = 0;
         for (int i = 0; i < list.get(0).length; i++) {
             if (category.equals(list.get(0)[i])) {
@@ -84,9 +85,9 @@ public class CSVReader {
         return index;
     }
 
-    public final ArrayList<String> findByName(String name,  ArrayList<String[]> list) {
+    public final ArrayList<String> findByCategory(String name,  ArrayList<String[]> list, String category) {
         ArrayList<String> foundList = new ArrayList<String>();
-        int column = this.findCategory("Name", list);
+        int column = this.findCategory(category, list);
         for (int i = 0; i < list.size(); i++) {
             if (name.equals(list.get(i)[column])) {
                 for (String strings : list.get(i)) {

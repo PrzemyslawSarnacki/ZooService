@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -40,7 +39,7 @@ public class AnimalDetailsType {
 
     @XmlElement(name = "DateOfBirth", required = true)
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar dateOfBirth;
+    protected String dateOfBirth;
     @XmlElement(name = "Height")
     protected int height;
     @XmlElement(name = "Weight")
@@ -51,10 +50,10 @@ public class AnimalDetailsType {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -63,10 +62,10 @@ public class AnimalDetailsType {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setDateOfBirth(XMLGregorianCalendar value) {
+    public void setDateOfBirth(String value) {
         this.dateOfBirth = value;
     }
 

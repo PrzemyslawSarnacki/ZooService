@@ -7,21 +7,21 @@ import java.util.Calendar;
 
 public class HealthParameters {
     
-    public static double heartRate() {
+    public final double heartRate() {
         Random rnd = new Random();
         int x = rnd.nextInt();
         double ecg = 5 * Math.sin(7 * x) * Math.sin(0.5 * x) * Math.cos(3.25 * x);
         return Math.abs(ecg) * 70;
     }
 
-    public static String mood() {
+    public final String mood() {
         String[] moods = { "Great Mood", "Good Mood", "Decent Mood", "Average Mood", "Bad Mood", "Very Bad Mood" };
         Random random = new Random();
         int randomChoice = random.nextInt(moods.length);
         return moods[randomChoice];
     }
 
-    public static double[] coordinates() {
+    public final double[] coordinates() {
         Random random = new Random();
         double latitude = random.nextDouble();
         double longitude = random.nextDouble();
@@ -29,13 +29,13 @@ public class HealthParameters {
         return coordinates;
     }
 
-    public static boolean vaccinationRequired(String start_date) {
+    public final boolean vaccinationRequired(String vaccinationDate) {
         boolean isRequired = true;
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String timeStamp = sdf.format(Calendar.getInstance().getTime());
 
         try {
-            Date d1 = sdf.parse(start_date);
+            Date d1 = sdf.parse(vaccinationDate);
             Date d2 = sdf.parse(timeStamp);
             long difference_In_Time = d2.getTime() - d1.getTime();
             long difference_In_Years = (difference_In_Time / (1000l * 60 * 60 * 24 * 365));
@@ -51,12 +51,6 @@ public class HealthParameters {
 
         return isRequired;
 
-    }
-
-    public static void main(String[] args) {
-        String start_date = "10-01-2020 01:10:20";
-
-        System.out.println(HealthParameters.vaccinationRequired(start_date));
     }
 
 }

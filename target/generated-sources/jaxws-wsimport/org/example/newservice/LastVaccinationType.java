@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -38,7 +37,7 @@ public class LastVaccinationType {
 
     @XmlElement(name = "VaccinationDate", required = true)
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar vaccinationDate;
+    protected String vaccinationDate;
     @XmlElement(name = "VaccineName", required = true)
     protected String vaccineName;
 
@@ -47,10 +46,10 @@ public class LastVaccinationType {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getVaccinationDate() {
+    public String getVaccinationDate() {
         return vaccinationDate;
     }
 
@@ -59,10 +58,10 @@ public class LastVaccinationType {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setVaccinationDate(XMLGregorianCalendar value) {
+    public void setVaccinationDate(String value) {
         this.vaccinationDate = value;
     }
 
