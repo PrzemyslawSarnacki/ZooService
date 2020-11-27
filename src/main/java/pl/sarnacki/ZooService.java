@@ -12,6 +12,8 @@ import pl.sarnacki.AnimalWithId;
 import org.example.newservice.AddAnimal;
 import org.example.newservice.SearchAnimal;
 import org.example.newservice.AnimalDetailsType;
+import org.example.newservice.CoordinatesType;
+import org.example.newservice.HealthParametersType;
 import org.example.newservice.ParentsType;
 import org.example.newservice.PopularityType;
 import org.example.newservice.AnimalClassificationType;
@@ -25,35 +27,8 @@ import org.example.newservice.LastVaccinationType;
 public class ZooService {
     static private Integer currentId = 0;
     static private List<AnimalWithId> animals = new ArrayList<>();
-    static private String CSV_FILE = "C:/Users/Przemyslaw/Projects/ZooService/src/Lol.csv";
+    static private String CSV_FILE = "C:/Users/Przemyslaw/Projects/ZooService/src/DatabaseXD.csv";
 
-    // static private List<AnimalWithId> animal = new ArrayList<>();
-
-    // public static void main(String[] args) {
-    // ParentsType parents = new ParentsType();
-    // parents.setMotherName("");
-    // parents.setFatherName("");
-    //
-    // AnimalDetailsType animalDetails = new AnimalDetailsType();
-    // animalDetails.setHeight(120);
-    // animalDetails.setWeight(12);
-    //// animalDetails.setDateOfBirth(2009-05-07T17:05:45.678Z);
-    //
-    // AnimalClassificationType animalClassification = new
-    // AnimalClassificationType();
-    // animalClassification.setClazz("fdsaf");
-    // animalClassification.setDomain("fdsaf");
-    // animalClassification.setFamily("fdsaf");
-    // animalClassification.setGenus("fdsaf");
-    // animalClassification.setOrder("fdsaf");
-    //
-    // LastVaccinationType lastVaccination = new LastVaccinationType();
-    //// lastVaccination.setVaccinationDate(value);
-    // lastVaccination.setVaccineName("value");
-    //
-    // addAnimal("name", parents, animalDetails, animalClassification,
-    // lastVaccination);
-    // }
     public int addAnimal(String name, org.example.newservice.ParentsType parents,
             org.example.newservice.AnimalDetailsType animalDetails,
             org.example.newservice.AnimalClassificationType animalClassification,
@@ -76,17 +51,6 @@ public class ZooService {
         return id;
     }
 
-    public int searchAnimal(String name, String dateOfBirth) {
-        
-        for (AnimalWithId animalWithI : animalWithId) {
-            
-            if (animalWithI.equals(name)) {
-                
-            }
-        }
-        return 0;
-    }
-
     public static List checkHealth(String name) {
         System.out.println("Sprawdzamy czy nasz zwierzaczek jest zdrowy :( ...");
         List healthReturns = new ArrayList<>();
@@ -103,19 +67,29 @@ public class ZooService {
         parentsType.setMotherName(motherName);
         
         HealthParameters healthParameters = new HealthParameters();
-        double heartRate = healthParameters.heartRate();
+        int heartRate = healthParameters.heartRate();
         String mood = healthParameters.mood();
         double[] coordinates = healthParameters.coordinates();
         boolean vaccinationRequired = healthParameters.vaccinationRequired(vaccinationDate);
+        CoordinatesType coordinatesType = new CoordinatesType();
+        coordinatesType.setLatitude((float)coordinates[0]);
+        coordinatesType.setLongitude((float)coordinates[1]);
         
-        
+        HealthParametersType healthParametersType = new HealthParametersType();
+        healthParametersType.setCoordinates(coordinatesType);
+        healthParametersType.setHeartRate(heartRate);
+        healthParametersType.setMood(mood);
+        healthParametersType.setVaccinationRequired(vaccinationRequired);
+        healthParametersType.setHealthState(mood);
+    
+        healthReturns.add(healthParametersType);
         healthReturns.add(parentsType);
-        
+        healthReturns.add(name);
 
         return healthReturns;
     }
     
-    public List checkPopularity(int id) {
+    public static List checkPopularity(int id) {
         System.out.println("Sprawdzamy czy nasz zwierzaczek jest popularny hehe ...");
         List popularityReturns = new ArrayList<>();
         CSVReader csv = new CSVReader(CSV_FILE);
@@ -140,6 +114,7 @@ public class ZooService {
 
     public static void main(String[] args) {
         System.out.println("lollll");
+        ZooService.checkPopularity(1);
     }
 
 }

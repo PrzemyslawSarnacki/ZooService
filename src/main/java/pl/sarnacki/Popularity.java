@@ -1,3 +1,5 @@
+package pl.sarnacki;
+
 import java.lang.Math;
 import java.util.Random;
 
