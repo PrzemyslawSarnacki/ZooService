@@ -36,18 +36,17 @@ public class ZooService {
         // TODO implement this method
         System.out.println("Dodaje zwierzaczka ...");
         CSVReader csv = new CSVReader(CSV_FILE);
-        
+
         ArrayList<String[]> list = csv.read();
         int id = csv.getIncrementedId(list);
         String idString = Integer.toString(id);
         String[] dataToWrite = { idString, name, parents.getMotherName(), parents.getFatherName(),
-            animalDetails.getHeight(), animalDetails.getWeight(), animalDetails.getDateOfBirth(),
+                animalDetails.getHeight(), animalDetails.getWeight(), animalDetails.getDateOfBirth(),
                 animalClassification.getDomain(), animalClassification.getFamily(), animalClassification.getGenus(),
                 animalClassification.getOrder(), animalClassification.getClazz(), lastVaccination.getVaccineName(),
                 lastVaccination.getVaccinationDate() };
         csv.write(dataToWrite);
-        
-        
+
         return id;
     }
 
@@ -57,7 +56,7 @@ public class ZooService {
         CSVReader csv = new CSVReader(CSV_FILE);
         ArrayList<String[]> list = csv.read();
         ArrayList<String> animalInfo = csv.findByCategory(name, list, "Name");
-        
+
         String motherName = animalInfo.get(2);
         String fatherName = animalInfo.get(3);
         String vaccinationDate = animalInfo.get(13);
@@ -65,30 +64,30 @@ public class ZooService {
         ParentsType parentsType = new ParentsType();
         parentsType.setFatherName(fatherName);
         parentsType.setMotherName(motherName);
-        
+
         HealthParameters healthParameters = new HealthParameters();
         int heartRate = healthParameters.heartRate();
         String mood = healthParameters.mood();
         double[] coordinates = healthParameters.coordinates();
         boolean vaccinationRequired = healthParameters.vaccinationRequired(vaccinationDate);
         CoordinatesType coordinatesType = new CoordinatesType();
-        coordinatesType.setLatitude((float)coordinates[0]);
-        coordinatesType.setLongitude((float)coordinates[1]);
-        
+        coordinatesType.setLatitude((float) coordinates[0]);
+        coordinatesType.setLongitude((float) coordinates[1]);
+
         HealthParametersType healthParametersType = new HealthParametersType();
         healthParametersType.setCoordinates(coordinatesType);
         healthParametersType.setHeartRate(heartRate);
         healthParametersType.setMood(mood);
         healthParametersType.setVaccinationRequired(vaccinationRequired);
         healthParametersType.setHealthState(mood);
-    
+
         healthReturns.add(healthParametersType);
         healthReturns.add(parentsType);
         healthReturns.add(name);
 
         return healthReturns;
     }
-    
+
     public static List checkPopularity(int id) {
         System.out.println("Sprawdzamy czy nasz zwierzaczek jest popularny hehe ...");
         List popularityReturns = new ArrayList<>();
