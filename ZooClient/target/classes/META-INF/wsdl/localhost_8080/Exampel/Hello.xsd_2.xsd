@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.4.3 (RELEASE-2.4.3-ad3323c; 2019-01-21T17:46:06+0000) JAXWS-RI/2.3.2 JAXWS-API/2.3.2 JAXB-RI/2.3.2 JAXB-API/2.3.2 git-revision#unknown. --><xs:schema xmlns:tns="http://wel/" xmlns:ns1="http://www.example.org/NewService/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://wel/">
+
+<xs:import namespace="http://www.example.org/NewService/" schemaLocation="http://localhost:8080/Exampel/Hello?xsd=1"/>
+
+<xs:element name="addAnimal" type="tns:addAnimal"/>
+
+<xs:element name="addAnimalResponse" type="tns:addAnimalResponse"/>
+
+<xs:element name="checkHealth" type="tns:checkHealth"/>
+
+<xs:element name="checkHealthResponse" type="tns:checkHealthResponse"/>
+
+<xs:element name="checkPopularity" type="tns:checkPopularity"/>
+
+<xs:element name="checkPopularityResponse" type="tns:checkPopularityResponse"/>
+
+<xs:complexType name="checkPopularity">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkPopularityResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkHealth">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkHealthResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addAnimal">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="parents" type="ns1:ParentsType" minOccurs="0"/>
+<xs:element name="animalDetails" type="ns1:AnimalDetailsType" minOccurs="0"/>
+<xs:element name="animalClassification" type="ns1:AnimalClassificationType" minOccurs="0"/>
+<xs:element name="lastVaccination" type="ns1:LastVaccinationType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addAnimalResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.4.3 (RELEASE-2.4.3-ad3323c; 2019-01-21T17:46:06+0000) JAXWS-RI/2.3.2 JAXWS-API/2.3.2 JAXB-RI/2.3.2 JAXB-API/2.3.2 git-revision#unknown. --><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://www.example.org/NewService/">
+
+<xs:complexType name="ParentsType">
+<xs:sequence>
+<xs:element name="MotherName" type="xs:string"/>
+<xs:element name="FatherName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="AnimalDetailsType">
+<xs:sequence>
+<xs:element name="DateOfBirth" type="xs:date"/>
+<xs:element name="Height" type="xs:int"/>
+<xs:element name="Weight" type="xs:float"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="AnimalClassificationType">
+<xs:sequence>
+<xs:element name="Domain" type="xs:string"/>
+<xs:element name="Class" type="xs:string"/>
+<xs:element name="Order" type="xs:string"/>
+<xs:element name="Family" type="xs:string"/>
+<xs:element name="Genus" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="LastVaccinationType">
+<xs:sequence>
+<xs:element name="VaccinationDate" type="xs:date"/>
+<xs:element name="VaccineName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

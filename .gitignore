@@ -18,6 +18,9 @@
 *.zip
 *.tar.gz
 *.rar
+*.lst
+*.netbeans_automatic_build
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+ZooClient/target/jaxws/stale/Hello.stale/.20a4fa17a2f435350b985f0149fd517f70f0a647

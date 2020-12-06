@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/NewService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NewService" targetNamespace="http://www.example.org/NewService/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/ZooService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ZooService" targetNamespace="http://www.example.org/ZooService/">
   <wsdl:types>
-    <xsd:schema targetNamespace="http://www.example.org/NewService/">
+    <xsd:schema targetNamespace="http://www.example.org/ZooService/">
       <xsd:element name="AddAnimal">
         <xsd:complexType>
           <xsd:sequence>
@@ -24,24 +24,36 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="SearchAnimal">
+      <xsd:element name="CheckHealth">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="Name" type="xsd:string"></xsd:element>
-      			<xsd:element name="DateOfBirth" type="xsd:string"></xsd:element>
 			</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="SearchAnimalResponse">
+      <xsd:element name="CheckHealthResponse">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="id" type="xsd:int"></xsd:element>
 				<xsd:element name="Name" type="xsd:string"></xsd:element>
-      			<xsd:element name="Age" type="xsd:int"></xsd:element>
-      			<xsd:element name="Parents" type="xsd:string"></xsd:element>
+      			<xsd:element name="Parents" type="tns:ParentsType"></xsd:element>
       			<xsd:element name="HealthParameters"
       				type="tns:HealthParametersType">
       			</xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CheckPopularity">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:int"></xsd:element>
+			</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CheckPopularityResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="Name" type="xsd:string"></xsd:element>
       			<xsd:element name="Popularity" type="tns:PopularityType"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
@@ -119,26 +131,54 @@
   <wsdl:message name="AddAnimalResponse">
     <wsdl:part element="tns:AddAnimalResponse" name="parameters"/>
   </wsdl:message>
-  <wsdl:message name="SearchAnimalRequest">
-  	<wsdl:part name="parameters" element="tns:SearchAnimal"></wsdl:part>
+  <wsdl:message name="CheckHealthRequest">
+  	<wsdl:part name="parameters" element="tns:CheckHealth"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="SearchAnimalResponse">
-  	<wsdl:part name="parameters" element="tns:SearchAnimalResponse"></wsdl:part>
+  <wsdl:message name="CheckHealthResponse">
+  	<wsdl:part name="parameters" element="tns:CheckHealthResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CheckPopularityRequest">
+  	<wsdl:part name="parameters" element="tns:CheckPopularity"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CheckPopularityResponse">
+  	<wsdl:part name="parameters" element="tns:CheckPopularityResponse"></wsdl:part>
   </wsdl:message>
   <wsdl:portType name="ZooService">
     <wsdl:operation name="AddAnimal">
       <wsdl:input message="tns:AddAnimalRequest"/>
       <wsdl:output message="tns:AddAnimalResponse"/>
     </wsdl:operation>
-    <wsdl:operation name="SearchAnimal">
-    	<wsdl:input message="tns:SearchAnimalRequest"></wsdl:input>
-    	<wsdl:output message="tns:SearchAnimalResponse"></wsdl:output>
+    <wsdl:operation name="CheckHealth">
+    	<wsdl:input message="tns:CheckHealthRequest" name="CheckHealthRequest"></wsdl:input>
+    	<wsdl:output message="tns:CheckHealthResponse" name="CheckHealthResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPopularity">
+    	<wsdl:input message="tns:CheckPopularityRequest" name="CheckPopularityRequest"></wsdl:input>
+    	<wsdl:output message="tns:CheckPopularityResponse" name="CheckPopularityResponse"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="NewServiceSOAP" type="tns:ZooService">
+  <wsdl:binding name="ZooServiceSOAP" type="tns:ZooService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="AddAnimal">
-      <soap:operation soapAction="http://www.example.org/NewService/AddAnimal"/>
+      <soap:operation soapAction="http://www.example.org/ZooService/AddAnimal"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckHealth">
+      <soap:operation soapAction="http://www.example.org/ZooService/CheckHealth"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPopularity">
+      <soap:operation soapAction="http://www.example.org/ZooService/CheckPopularity"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
@@ -148,7 +188,7 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ZooService">
-    <wsdl:port binding="tns:NewServiceSOAP" name="ZooServiceSOAP">
+    <wsdl:port binding="tns:ZooServiceSOAP" name="ZooServiceSOAP">
       <soap:address location="http://www.example.org/"/>
     </wsdl:port>
   </wsdl:service>

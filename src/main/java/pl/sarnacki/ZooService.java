@@ -3,56 +3,70 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+// package wel;
 package pl.sarnacki;
 
-import javax.jws.WebService;
-import java.util.List;
 import java.util.ArrayList;
-import pl.sarnacki.AnimalWithId;
-import org.example.newservice.AddAnimal;
-import org.example.newservice.SearchAnimal;
-import org.example.newservice.AnimalDetailsType;
+import java.util.List;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import org.example.newservice.CoordinatesType;
 import org.example.newservice.HealthParametersType;
 import org.example.newservice.ParentsType;
 import org.example.newservice.PopularityType;
 import org.example.newservice.AnimalClassificationType;
+import org.example.newservice.AnimalDetailsType;
 import org.example.newservice.LastVaccinationType;
 
 /**
  *
  * @author student
  */
-@WebService(serviceName = "ZooService", portName = "ZooServiceSOAP", endpointInterface = "org.example.newservice.ZooService", targetNamespace = "http://www.example.org/NewService/", wsdlLocation = "WEB-INF/wsdl/ZooService.wsdl")
+@WebService(serviceName = "ZooService")
 public class ZooService {
-    static private Integer currentId = 0;
-    static private List<AnimalWithId> animals = new ArrayList<>();
-    static private String CSV_FILE = "C:/Users/Przemyslaw/Projects/ZooService/src/DatabaseXD.csv";
+    final private String CSV_FILE = "/home/student/NetBeansProjects/ZooService/src/DatabaseXD.csv";
 
-    public int addAnimal(String name, org.example.newservice.ParentsType parents,
-            org.example.newservice.AnimalDetailsType animalDetails,
-            org.example.newservice.AnimalClassificationType animalClassification,
-            org.example.newservice.LastVaccinationType lastVaccination) {
-        // TODO implement this method
-        System.out.println("Dodaje zwierzaczka ...");
+
+    /**
+     * Web service operation
+     * @param id
+     * @return 
+     */
+    @WebMethod(operationName = "checkPopularity")
+    public List<Object> checkPopularity(@WebParam(name = "id") int id) {
+        System.out.println("Sprawdzamy czy nasz zwierzaczek jest popularny hehe ...");
+        List<Object> popularityReturns = new ArrayList<>();
         CSVReader csv = new CSVReader(CSV_FILE);
-
         ArrayList<String[]> list = csv.read();
-        int id = csv.getIncrementedId(list);
-        String idString = Integer.toString(id);
-        String[] dataToWrite = { idString, name, parents.getMotherName(), parents.getFatherName(),
-                animalDetails.getHeight(), animalDetails.getWeight(), animalDetails.getDateOfBirth(),
-                animalClassification.getDomain(), animalClassification.getFamily(), animalClassification.getGenus(),
-                animalClassification.getOrder(), animalClassification.getClazz(), lastVaccination.getVaccineName(),
-                lastVaccination.getVaccinationDate() };
-        csv.write(dataToWrite);
+        ArrayList<String> animalInfo = csv.findByCategory(Integer.toString(id), list, "id");
+        String name = animalInfo.get(1);
 
-        return id;
+        Popularity popularity = new Popularity();
+        int visitorsToday = popularity.visitorsToday();
+        int visitorsYesterday = popularity.visitorsYesterday();
+        int meanVisitors = popularity.meanVisitors();
+        PopularityType popularityType = new PopularityType();
+        popularityType.setVisitorsToday(visitorsToday);
+        popularityType.setVisitorsYesterday(visitorsYesterday);
+        popularityType.setMeanVisitorsCount(meanVisitors);
+        popularityReturns.add(popularityType);
+//        popularityReturns.add(name);
+//        popularityReturns.add(visitorsToday);
+//        popularityReturns.add(visitorsYesterday);
+//        popularityReturns.add(meanVisitors);
+        return popularityReturns;
     }
 
-    public static List checkHealth(String name) {
+    /**
+     * Web service operation
+     * @param name
+     * @return 
+     */
+    @WebMethod(operationName = "checkHealth")
+    public List<Object> checkHealth(@WebParam(name = "name") String name) {
         System.out.println("Sprawdzamy czy nasz zwierzaczek jest zdrowy :( ...");
-        List healthReturns = new ArrayList<>();
+        List<Object> healthReturns = new ArrayList<>();
         CSVReader csv = new CSVReader(CSV_FILE);
         ArrayList<String[]> list = csv.read();
         ArrayList<String> animalInfo = csv.findByCategory(name, list, "Name");
@@ -83,37 +97,42 @@ public class ZooService {
 
         healthReturns.add(healthParametersType);
         healthReturns.add(parentsType);
-        healthReturns.add(name);
-
+//        healthReturns.add(motherName);
+//        healthReturns.add(fatherName);
+//        healthReturns.add(heartRate);
+//        healthReturns.add(vaccinationDate);
+//        healthReturns.add(mood); 
         return healthReturns;
     }
 
-    public static List checkPopularity(int id) {
-        System.out.println("Sprawdzamy czy nasz zwierzaczek jest popularny hehe ...");
-        List popularityReturns = new ArrayList<>();
+    /**
+     * Web service operation
+     * @param name
+     * @param parents
+     * @param animalDetails
+     * @param lastVaccination
+     * @param animalClassification
+     * @return 
+     */
+    @WebMethod(operationName = "addAnimal")
+    public int addAnimal(@WebParam(name = "name") String name, @WebParam(name = "parents") ParentsType parents, @WebParam(name = "animalDetails") AnimalDetailsType animalDetails, @WebParam(name = "animalClassification") AnimalClassificationType animalClassification, @WebParam(name = "lastVaccination") LastVaccinationType lastVaccination) {
+        //TODO write your implementation code here:
+        System.out.println("Dodaje zwierzaczka ...");
         CSVReader csv = new CSVReader(CSV_FILE);
+
         ArrayList<String[]> list = csv.read();
-        ArrayList<String> animalInfo = csv.findByCategory(Integer.toString(id), list, "id");
-        String name = animalInfo.get(1);
+        int id = csv.getIncrementedId(list);
+        String idString = Integer.toString(id);
+        String[] dataToWrite = {idString, name, parents.getMotherName(), parents.getFatherName(),
+            Float.toString(animalDetails.getHeight()), Float.toString(animalDetails.getWeight()), animalDetails.getDateOfBirth(),
+            animalClassification.getDomain(), animalClassification.getFamily(), animalClassification.getGenus(),
+            animalClassification.getOrder(), animalClassification.getClazz(), lastVaccination.getVaccineName(),
+            lastVaccination.getVaccinationDate()};
+        csv.write(dataToWrite);
 
-        Popularity popularity = new Popularity();
-        int visitorsToday = popularity.visitorsToday();
-        int visitorsYesterday = popularity.visitorsYesterday();
-        int meanVisitors = popularity.meanVisitors();
-        PopularityType popularityType = new PopularityType();
-        popularityType.setVisitorsToday(visitorsToday);
-        popularityType.setVisitorsYesterday(visitorsYesterday);
-        popularityType.setMeanVisitors(meanVisitors);
-        popularityReturns.add(popularityType);
-        popularityReturns.add(name);
-
-        return popularityReturns;
-
+        return id;
+        
     }
 
-    public static void main(String[] args) {
-        System.out.println("lollll");
-        ZooService.checkPopularity(1);
-    }
-
+    
 }
