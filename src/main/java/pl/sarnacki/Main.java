@@ -5,9 +5,9 @@ import java.util.List;
 import org.example.newservice.PopularityType;
 
 public class Main {
-    public static List checkPopularity(int id) {
+    public static List<Object> checkPopularity(int id) {
         System.out.println("Sprawdzamy czy nasz zwierzaczek jest popularny hehe ...");
-        List popularityReturns = new ArrayList<>();
+        List<Object> popularityReturns = new ArrayList<>();
         CSVReader csv = new CSVReader(CSV_FILE);
         ArrayList<String[]> list = csv.read();
         ArrayList<String> animalInfo = csv.findByCategory(Integer.toString(id), list, "id");
@@ -30,6 +30,6 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("lollll");
-        ZooService.checkPopularity(1);
+        checkPopularity(1);
     }
 }
